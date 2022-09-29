@@ -41,12 +41,46 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public DobbeltLenketListe(T[] a) {
-        if(a == null)
-            throw new NullPointerException("Tabellen a er null!");
+        this();  // alle variabelene er nullet
 
-        hode = hale = null;
-        antall = 0;
-        endringer = 0;
+        if(tom()){
+            throw new NullPointerException("Tabellen er null!");
+            hode.neste=null;
+            hode.forrige=null;
+            hale.neste=null;
+            hale.forrige=null;
+        }
+
+        //skal loope gjennom gjennom listen a. For å legge verdiene i a i LenketListe.
+        // Vi sjekker også om noen av verdiene i tabellen a er null.
+
+        for(int i = 0; i <a.length; i++){
+            if(a[i] ==null){
+                continue;
+            }
+            Node<T> node = new Node<>(a[i]);
+            hode.neste=node;
+        }
+        // Finner den første i a som ikke er null
+        int i = 0; for (; i < a.length && a[i] == null; i++);
+
+
+        if (i < a.length)
+        {
+            Node<T> p = hode = new Node<>(a[i]);  // den første noden
+            antall = 1;                                 // vi har minst en node
+
+            for (i++; i < a.length; i++)
+            {
+                if (a[i] != null)
+                {
+                    p = p.neste = new Node<>(a[i]);   // en ny node
+                    antall++;
+                }
+            }
+            hale = a[i];
+        }
+
 
 
         //throw new UnsupportedOperationException();
