@@ -37,37 +37,46 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
     }
 
     public DobbeltLenketListe(T[] a) {
         this();  // alle variabelene er nullet
 
+        /*
         if(tom()){
-            hode.neste=null;
-            hode.forrige=null;
-            hale.neste=null;
-            hale.forrige=null;
+            hode =null;
+            hale =null;
             throw new NullPointerException("Tabellen er null!");
         }
+
+         */
 
         //skal loope gjennom gjennom listen a. For å legge verdiene i a i LenketListe.
         // Vi sjekker også om noen av verdiene i tabellen a er null.
 
         //Setter hode som startverdi "current"
-        Node<T> current = hode;
+        //Node<T> current = hode;
 
         //Går igjennom a
         for(int i = 0; i < a.length; i++){
             //Hvis element i a er null, gå videre til neste element
-            if(a[i] == null)
+            if(a[i] == null){
                 continue;
+            }
+            else{
+                hode = new Node<>(a[i]);
+                //hale = hale.neste = new Node<>(a[i]);
+            }
             //Hvis ikke null, opprett ny node med elementets verdi og sett denne som neste node i listen
+            /*
             Node<T> node = new Node<>(a[i]);
             antall++;
             node.forrige = current;
             current.neste = node;
             current = node;
+
+             */
         }
 
         /*
@@ -211,6 +220,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         throw new UnsupportedOperationException();
+    }
+
+    public static void main(String[] args) {
+        String[] s = {"Ole","Per", "Kari"};
+        Liste<String> liste = new DobbeltLenketListe<>(s);
+        System.out.println(liste.antall() + " " + liste.tom());
+
     }
 
 } // class DobbeltLenketListe
