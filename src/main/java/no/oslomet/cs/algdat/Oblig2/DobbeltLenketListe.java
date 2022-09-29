@@ -170,7 +170,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public static void main(String[] args) {
-        System.out.println("hei");
+        System.out.println("hei på deg");
     }
 
 } // class DobbeltLenketListe
