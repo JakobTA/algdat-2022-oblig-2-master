@@ -43,38 +43,42 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public DobbeltLenketListe(T[] a) {
         this();  // alle variabelene er nullet
 
-        /*
+/*
         if(tom()){
             hode =null;
             hale =null;
             throw new NullPointerException("Tabellen er null!");
         }
 
-         */
+ */
+
+
 
         //skal loope gjennom gjennom listen a. For å legge verdiene i a i LenketListe.
         // Vi sjekker også om noen av verdiene i tabellen a er null.
 
         //Setter hode som startverdi "current"
         //Node<T> current = hode;
+
         //Går igjennom a
         int start = 0;
-        for(int i = 0; i < a.length; i++){
+
+        for(int i = 0; i < a.length;i++){
             if(a[i] != null){
                 start = i;
                 break;
             }
         }
-
-        hode = new Node<>(a[start]);
-
+       hale = hode = new Node<>(a[start]);
         for(int i = start; i < a.length; i++){
             //Hvis element i a er null, gå videre til neste element
             if(a[i] == null){
                 continue;
             }
-            hale = hale.neste = new Node<>(a[i]);
-
+            else{
+                hale = hale.neste = new Node<>(a[i]);
+                antall++;
+            }
             //Hvis ikke null, opprett ny node med elementets verdi og sett denne som neste node i listen
             /*
             Node<T> node = new Node<>(a[i]);
@@ -230,7 +234,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public static void main(String[] args) {
-        String[] s = {"Ole","Per", "Kari"};
+        String[] s = {"Ole","Per", "Kari", "Ali"};
         Liste<String> liste = new DobbeltLenketListe<>(s);
         System.out.println(liste.antall() + " " + liste.tom());
 
