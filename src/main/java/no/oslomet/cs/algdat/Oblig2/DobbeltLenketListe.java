@@ -48,8 +48,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         antall = 0;
         endringer = 0;
 
-        AIDS
-
         //throw new UnsupportedOperationException();
     }
 
@@ -168,10 +166,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         throw new UnsupportedOperationException();
-    }
-
-    public static void main(String[] args) {
-        System.out.println("hei");
     }
 
 } // class DobbeltLenketListe
