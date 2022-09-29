@@ -57,17 +57,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         //Setter hode som startverdi "current"
         //Node<T> current = hode;
-
         //Går igjennom a
+        int start = 0;
         for(int i = 0; i < a.length; i++){
+            if(a[i] != null){
+                start = i;
+                break;
+            }
+        }
+
+        hode = new Node<>(a[start]);
+
+        for(int i = start; i < a.length; i++){
             //Hvis element i a er null, gå videre til neste element
             if(a[i] == null){
                 continue;
             }
-            else{
-                hode = new Node<>(a[i]);
-                //hale = hale.neste = new Node<>(a[i]);
-            }
+            hale = hale.neste = new Node<>(a[i]);
+
             //Hvis ikke null, opprett ny node med elementets verdi og sett denne som neste node i listen
             /*
             Node<T> node = new Node<>(a[i]);
