@@ -48,6 +48,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         antall = 0;
         endringer = 0;
 
+        AIDS
 
         //throw new UnsupportedOperationException();
     }
