@@ -6,6 +6,7 @@ package no.oslomet.cs.algdat.Oblig2;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Objects;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
@@ -38,37 +39,32 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public DobbeltLenketListe() {
         hode = hale = null;
-        //throw new UnsupportedOperationException();
+        antall = 0;
+        // throw new UnsupportedOperationException();
     }
 
     public DobbeltLenketListe(T[] a) {
-        for(int i = 0; i < a.length; i++){
-            antall++;
-        }
-        if(tom()){
-            hode = null;
-            hale = null;
-            throw new NullPointerException("Det er ingen verdi");
-        }
-        int start = 0;
-        for(int i = 0; i < a.length; i++){
-            if(a[i] != null){
-                start = i;
+        this();
+        //addded graddle in terminal
+        Objects.requireNonNull(a,"Ikke tillatt med null verdier");
+
+        int i = 0;//prøver å finne første a som ikke er null;
+        for(;i<a.length && a[i] == null; i++);
+
+        if(i <a.length){
+            Node<T> nyNode = hode = new Node<>(a[i],null,null); // den første noden
+            antall ++;
+
+            for(i++;i<a.length;i++){
+                if(a[i] != null){
+                    nyNode = nyNode.neste = new Node<>(a[i],nyNode,null);
+                    antall++;
+                }
+                hale = nyNode;
+                hale.neste = null;
+                hode.forrige = null;
             }
         }
-
-        Node nyNode = new Node<>(a[start]);
-
-        if(hode == null){
-            hode = nyNode;
-        }
-        else {
-            hale.neste = nyNode;
-        }
-        hale = nyNode;
-
-
-
         //throw new UnsupportedOperationException();
     }
 
@@ -152,18 +148,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public Iterator<T> iterator(int indeks) {
         throw new UnsupportedOperationException();
     }
-    public  void skrivUt(){
-        Node denne = hode;
-        hale.neste = hode;
-
-
-        if(hode != null){
-            do{
-                System.out.print(denne.verdi + ",");
-                denne = denne.neste;
-            } while (denne != hode);
-        }
-    }
 
     private class DobbeltLenketListeIterator implements Iterator<T> {
         private Node<T> denne;
@@ -200,9 +184,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         throw new UnsupportedOperationException();
     }
-
-    //skriv ut kde
-
 
     public static void main(String[] args) {
         String[] s = {"Ole","Per", "Kari", "Ali"};
