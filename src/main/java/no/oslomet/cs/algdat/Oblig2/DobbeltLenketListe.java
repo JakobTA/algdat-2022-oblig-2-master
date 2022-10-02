@@ -45,7 +45,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public DobbeltLenketListe(T[] a) {
-        this();
+
         //addded graddle in terminal
         Objects.requireNonNull(a,"Ikke tillatt med null verdier");
 
@@ -135,7 +135,29 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException();
+
+        StringBuilder s = new StringBuilder();
+
+        s.append('[');
+
+        if (!tom())
+        {
+            Node<T> p = hode;
+            s.append(p.verdi);
+
+            p = p.neste;
+
+            while (p != null)  // tar med resten hvis det er noe mer
+            {
+                s.append(',').append(' ').append(p.verdi);
+                p = p.neste;
+            }
+        }
+
+        s.append(']');
+
+        return s.toString();
+        //throw new UnsupportedOperationException();
     }
 
     public String omvendtString() {
