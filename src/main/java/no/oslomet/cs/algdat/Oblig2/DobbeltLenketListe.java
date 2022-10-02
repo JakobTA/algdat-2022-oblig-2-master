@@ -67,11 +67,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 hale.neste = null;
                 hode.forrige = null;
             }
-
-
         }
-
-
         //throw new UnsupportedOperationException();
     }
 
@@ -87,14 +83,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean tom() {
-
         return antall ==0;
         //throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean leggInn(T verdi) {
-        throw new UnsupportedOperationException();
+        Objects.requireNonNull(verdi,"Ikke tillatt med null verdier");
+        //throw new UnsupportedOperationException();
     }
 
     @Override
