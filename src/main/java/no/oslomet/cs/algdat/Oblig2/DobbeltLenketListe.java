@@ -6,6 +6,7 @@ package no.oslomet.cs.algdat.Oblig2;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Objects;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
@@ -37,82 +38,33 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
-        //throw new UnsupportedOperationException();
+        hode = hale = null;
+        antall = 0;
+        // throw new UnsupportedOperationException();
     }
 
     public DobbeltLenketListe(T[] a) {
-        this();  // alle variabelene er nullet
+        this();
+        //addded graddle in terminal
+        Objects.requireNonNull(a,"Ikke tillatt med null verdier");
 
-/*
-        if(tom()){
-            hode =null;
-            hale =null;
-            throw new NullPointerException("Tabellen er null!");
-        }
+        int i = 0;//prøver å finne første a som ikke er null;
+        for(;i<a.length && a[i] == null; i++);
 
- */
+        if(i <a.length){
+            Node<T> nyNode = hode = new Node<>(a[i],null,null); // den første noden
+            antall ++;
 
-
-
-        //skal loope gjennom gjennom listen a. For å legge verdiene i a i LenketListe.
-        // Vi sjekker også om noen av verdiene i tabellen a er null.
-
-        //Setter hode som startverdi "current"
-        //Node<T> current = hode;
-
-        //Går igjennom a
-        int start = 0;
-
-        for(int i = 0; i < a.length;i++){
-            if(a[i] != null){
-                start = i;
-                break;
-            }
-        }
-       hale = hode = new Node<>(a[start]);
-        for(int i = start; i < a.length; i++){
-            //Hvis element i a er null, gå videre til neste element
-            if(a[i] == null){
-                continue;
-            }
-            else{
-                hale = hale.neste = new Node<>(a[i]);
-                antall++;
-            }
-            //Hvis ikke null, opprett ny node med elementets verdi og sett denne som neste node i listen
-            /*
-            Node<T> node = new Node<>(a[i]);
-            antall++;
-            node.forrige = current;
-            current.neste = node;
-            current = node;
-
-             */
-        }
-
-        /*
-        // Finner den første i a som ikke er null
-        int i = 0; for (; i < a.length && a[i] == null; i++);
-
-
-        if (i < a.length)
-        {
-            Node<T> p = hode = new Node<>(a[i]);  // den første noden
-            antall = 1;                                 // vi har minst en node
-
-            for (i++; i < a.length; i++)
-            {
-                if (a[i] != null)
-                {
-                    p = p.neste = new Node<>(a[i]);   // en ny node
+            for(i++;i<a.length;i++){
+                if(a[i] != null){
+                    nyNode = nyNode.neste = new Node<>(a[i],nyNode,null);
                     antall++;
                 }
+                hale = nyNode;
+                hale.neste = null;
+                hode.forrige = null;
             }
-            hale = a[i];
-        } */
-
-
-
+        }
         //throw new UnsupportedOperationException();
     }
 
