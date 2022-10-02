@@ -40,6 +40,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public DobbeltLenketListe() {
         hode = hale = null;
         antall = 0;
+        endringer = 0;
         // throw new UnsupportedOperationException();
     }
 
@@ -54,17 +55,23 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if(i <a.length){
             Node<T> nyNode = hode = new Node<>(a[i],null,null); // den første noden
             antall ++;
+            endringer++;
 
             for(i++;i<a.length;i++){
                 if(a[i] != null){
                     nyNode = nyNode.neste = new Node<>(a[i],nyNode,null);
                     antall++;
+                    endringer++;
                 }
                 hale = nyNode;
                 hale.neste = null;
                 hode.forrige = null;
             }
+
+
         }
+
+
         //throw new UnsupportedOperationException();
     }
 
@@ -74,15 +81,14 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-        return antall;
 
-        //throw new UnsupportedOperationException();
+        return antall;//throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean tom() {
 
-        return antall == 0;
+        return antall ==0;
         //throw new UnsupportedOperationException();
     }
 
@@ -207,13 +213,5 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         throw new UnsupportedOperationException();
     }
 
-    public static void main(String[] args) {
-        String[] s = {"Ole","Per", "Kari", "Ali"};
-        Liste<String> liste = new DobbeltLenketListe<>(s);
-        System.out.println(liste.antall() + " " + liste.tom());
-
-    }
-
 } // class DobbeltLenketListe
-
 
