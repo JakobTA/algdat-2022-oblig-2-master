@@ -37,79 +37,35 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
+        hode = hale = null;
         //throw new UnsupportedOperationException();
     }
 
     public DobbeltLenketListe(T[] a) {
-        this();  // alle variabelene er nullet
-
-/*
-        if(tom()){
-            hode =null;
-            hale =null;
-            throw new NullPointerException("Tabellen er null!");
+        for(int i = 0; i < a.length; i++){
+            antall++;
         }
-
- */
-
-
-
-        //skal loope gjennom gjennom listen a. For å legge verdiene i a i LenketListe.
-        // Vi sjekker også om noen av verdiene i tabellen a er null.
-
-        //Setter hode som startverdi "current"
-        //Node<T> current = hode;
-
-        //Går igjennom a
+        if(tom()){
+            hode = null;
+            hale = null;
+            throw new NullPointerException("Det er ingen verdi");
+        }
         int start = 0;
-
-        for(int i = 0; i < a.length;i++){
+        for(int i = 0; i < a.length; i++){
             if(a[i] != null){
                 start = i;
-                break;
             }
         }
-       hale = hode = new Node<>(a[start]);
-        for(int i = start; i < a.length; i++){
-            //Hvis element i a er null, gå videre til neste element
-            if(a[i] == null){
-                continue;
-            }
-            else{
-                hale = hale.neste = new Node<>(a[i]);
-                antall++;
-            }
-            //Hvis ikke null, opprett ny node med elementets verdi og sett denne som neste node i listen
-            /*
-            Node<T> node = new Node<>(a[i]);
-            antall++;
-            node.forrige = current;
-            current.neste = node;
-            current = node;
 
-             */
+        Node nyNode = new Node<>(a[start]);
+
+        if(hode == null){
+            hode = nyNode;
         }
-
-        /*
-        // Finner den første i a som ikke er null
-        int i = 0; for (; i < a.length && a[i] == null; i++);
-
-
-        if (i < a.length)
-        {
-            Node<T> p = hode = new Node<>(a[i]);  // den første noden
-            antall = 1;                                 // vi har minst en node
-
-            for (i++; i < a.length; i++)
-            {
-                if (a[i] != null)
-                {
-                    p = p.neste = new Node<>(a[i]);   // en ny node
-                    antall++;
-                }
-            }
-            hale = a[i];
-        } */
+        else {
+            hale.neste = nyNode;
+        }
+        hale = nyNode;
 
 
 
@@ -196,6 +152,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public Iterator<T> iterator(int indeks) {
         throw new UnsupportedOperationException();
     }
+    public  void skrivUt(){
+        Node denne = hode;
+        hale.neste = hode;
+
+
+        if(hode != null){
+            do{
+                System.out.print(denne.verdi + ",");
+                denne = denne.neste;
+            } while (denne != hode);
+        }
+    }
 
     private class DobbeltLenketListeIterator implements Iterator<T> {
         private Node<T> denne;
@@ -232,6 +200,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         throw new UnsupportedOperationException();
     }
+
+    //skriv ut kde
+
 
     public static void main(String[] args) {
         String[] s = {"Ole","Per", "Kari", "Ali"};
