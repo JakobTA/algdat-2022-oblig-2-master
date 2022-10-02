@@ -4,6 +4,8 @@ package no.oslomet.cs.algdat.Oblig2;
 ////////////////// class DobbeltLenketListe //////////////////////////////
 
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Objects;
@@ -52,7 +54,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         int i = 0;//prøver å finne første a som ikke er null;
         for(;i<a.length && a[i] == null; i++);
 
-        if(i <a.length){
+        if(i < a.length){
             Node<T> nyNode = hode = new Node<>(a[i],null,null); // den første noden
             antall ++;
             endringer++;
