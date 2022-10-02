@@ -1,4 +1,6 @@
 )Oppgave 10b: Ikke unntak for tom liste!
+,Oppgave 2j: Du har [2], skal være [2, 1]!
+2Oppgave 2l: Du har [4], skal være [4, 3, 2, 1]!
 5Oppgave 5b: Kaster feil type unntak for indeksfeil!
 8Oppgave 5d: Metoden leggInn() kaster feil type unntak!
 ;Oppgave 5f: Det kastes feil type unntak for null-verdier!
