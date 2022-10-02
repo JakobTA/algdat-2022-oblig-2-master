@@ -83,13 +83,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean tom() {
-
         return antall ==0;
         //throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean leggInn(T verdi) {
+        Objects.requireNonNull(verdi,"Ikke tillatt med null verdier");
         throw new UnsupportedOperationException();
     }
 
