@@ -40,6 +40,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int endringer;         // antall endringer i listen
 
     public DobbeltLenketListe() {
+        //Setter startverdier til null og 0.
         hode = hale = null;
         antall = 0;
         endringer = 0;
@@ -47,18 +48,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public DobbeltLenketListe(T[] a) {
-
-        //addded graddle in terminal
+        //Dersom a == null, gi brukeren feilmelding
         Objects.requireNonNull(a,"Ikke tillatt med null verdier");
 
-        int i = 0;//prøver å finne første a som ikke er null;
+        //Finne første element i a som ikke er null.
+        int i = 0;
         for(;i<a.length && a[i] == null; i++);
 
         if(i < a.length){
-            Node<T> nyNode = hode = new Node<>(a[i],null,null); // den første noden
+            //Oppretter den første noden ved hode og setter pekere til null
+            Node<T> nyNode = hode = new Node<>(a[i],null,null);
             antall ++;
             endringer++;
 
+            //Går igjennom resten av elementer i a, dersom de finnes/ikke er null
+            //og oppretter nye noder med elementet i a og setter pekere
             for(i++;i<a.length;i++){
                 if(a[i] != null){
                     nyNode = nyNode.neste = new Node<>(a[i],nyNode,null);
@@ -79,26 +83,31 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-
+        //Bare returnerer antallet
         return antall;//throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean tom() {
-        return antall ==0;
+        //Returner true dersom antall noder er 0.
+        return antall == 0;
         //throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean leggInn(T verdi) {
+        //Sjekker først at elementet ikke er null, hvis ja, send feilmelding
         Objects.requireNonNull(verdi,"Ikke tillatt med null verdier");
 
+        //Oppretter ny node
         Node<T> node = new Node<>(verdi);
 
-        if(antall == 0){
+        //Hvis listen er tom, la hode og hale peke til den første nye noden
+        if(tom()){
             hode = hale = node;
             antall++; endringer++;
             return true;
+        //Hvis ikke, begynn på slutten, sett nodes pekere etter hale og flytt halens pekere til noden og flytt halen
         }else{
             node.forrige = hale;
             hale.neste = node;
@@ -151,27 +160,34 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public String toString() {
+        //Bruker stringbuilder for å bygge ut-strengen. Starter med '['.
         StringBuilder s = new StringBuilder();
         s.append('[');
 
+        //Så lenge den lenkede listen ikke er tom gjør følgende.
         if (!tom())
         {
+            //Begynn med noden som hodet peker på, legg verdien inn i strengen
             Node<T> p = hode;
             s.append(p.verdi);
 
+            //Valgt node endres til neste node i listen
             p = p.neste;
 
-            while (p != null)  // tar med resten hvis det er noe mer
+            //Så lenge noden ikke er null, legg resten av listens elementer til i strengen.
+            while (p != null)
             {
                 s.append(',').append(' ').append(p.verdi);
                 p = p.neste;
             }
         }
+        //Legg til slutt-bracket og returner den konstruerte strengen
         s.append(']');
         return s.toString();
         //throw new UnsupportedOperationException();
     }
 
+    //Metoden gjør akkurat det samme som toString, men går baklengs istedenfor.
     public String omvendtString() {
         StringBuilder s = new StringBuilder();
         s.append('[');
@@ -183,7 +199,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
             p = p.forrige;
 
-            while (p != null)  // tar med resten hvis det er noe mer
+            while (p != null)
             {
                 s.append(',').append(' ').append(p.verdi);
                 p = p.forrige;
