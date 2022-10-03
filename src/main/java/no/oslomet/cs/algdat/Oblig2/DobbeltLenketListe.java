@@ -179,7 +179,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         //Variabler som lagrer valgt node
         Node<T> node = hode;
-        //Så lenge noden ikke treffer halen, sammenlign verdier
+        //Går igjennom listen, sammenlign verdier, og går til neste indeks/node
         for(int i = 0; i < antall; i++){
             if(node.verdi.equals(verdi))
                 return i;
