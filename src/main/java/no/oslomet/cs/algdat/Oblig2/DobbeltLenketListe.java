@@ -97,7 +97,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //Hvis index er større eller lik antall/2 begynn fra halen. Gå bakover til noden er funnet
             Node<T> node = hale;
 
-            int i = 0;
+            int i = antall-1;
             while(i != indeks){
                 node = node.forrige;
                 i--;
