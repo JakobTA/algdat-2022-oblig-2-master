@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.045s</div>
+<div class="counter">0.054s</div>
 <p>duration</p>
 </div>
 </td>
@@ -77,7 +77,7 @@
 <h3 class="failures">oppgave10()</h3>
 <span class="code">
 <pre>java.lang.UnsupportedOperationException
-	at no.oslomet.cs.algdat.Oblig2.DobbeltLenketListe.sorter(DobbeltLenketListe.java:318)
+	at no.oslomet.cs.algdat.Oblig2.DobbeltLenketListe.sorter(DobbeltLenketListe.java:355)
 	at no.oslomet.cs.algdat.Oblig2.Oblig2Test.oppgave10(Oblig2Test.java:1291)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -171,7 +171,7 @@
 <span class="code">
 <pre>java.lang.NullPointerException
 	at no.oslomet.cs.algdat.Oblig2.DobbeltLenketListe.finnNode(DobbeltLenketListe.java:102)
-	at no.oslomet.cs.algdat.Oblig2.DobbeltLenketListe.hent(DobbeltLenketListe.java:170)
+	at no.oslomet.cs.algdat.Oblig2.DobbeltLenketListe.hent(DobbeltLenketListe.java:207)
 	at no.oslomet.cs.algdat.Oblig2.Oblig2Test.oppgave3(Oblig2Test.java:281)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -263,8 +263,9 @@
 <a name="oppgave5()"></a>
 <h3 class="failures">oppgave5()</h3>
 <span class="code">
-<pre>java.lang.UnsupportedOperationException
-	at no.oslomet.cs.algdat.Oblig2.DobbeltLenketListe.leggInn(DobbeltLenketListe.java:152)
+<pre>java.lang.IndexOutOfBoundsException: Indeks: 0, Antall: 0
+	at no.oslomet.cs.algdat.Oblig2.Liste.indeksKontroll(Liste.java:37)
+	at no.oslomet.cs.algdat.Oblig2.DobbeltLenketListe.leggInn(DobbeltLenketListe.java:154)
 	at no.oslomet.cs.algdat.Oblig2.Oblig2Test.oppgave5(Oblig2Test.java:636)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -357,7 +358,7 @@
 <h3 class="failures">oppgave6()</h3>
 <span class="code">
 <pre>java.lang.UnsupportedOperationException
-	at no.oslomet.cs.algdat.Oblig2.DobbeltLenketListe.fjern(DobbeltLenketListe.java:216)
+	at no.oslomet.cs.algdat.Oblig2.DobbeltLenketListe.fjern(DobbeltLenketListe.java:253)
 	at no.oslomet.cs.algdat.Oblig2.Oblig2Test.oppgave6(Oblig2Test.java:707)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -450,7 +451,7 @@
 <h3 class="failures">oppgave7()</h3>
 <span class="code">
 <pre>java.lang.UnsupportedOperationException
-	at no.oslomet.cs.algdat.Oblig2.DobbeltLenketListe.nullstill(DobbeltLenketListe.java:221)
+	at no.oslomet.cs.algdat.Oblig2.DobbeltLenketListe.nullstill(DobbeltLenketListe.java:258)
 	at no.oslomet.cs.algdat.Oblig2.Oblig2Test.oppgave7(Oblig2Test.java:954)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -543,7 +544,7 @@
 <h3 class="failures">oppgave8()</h3>
 <span class="code">
 <pre>java.lang.UnsupportedOperationException
-	at no.oslomet.cs.algdat.Oblig2.DobbeltLenketListe.iterator(DobbeltLenketListe.java:278)
+	at no.oslomet.cs.algdat.Oblig2.DobbeltLenketListe.iterator(DobbeltLenketListe.java:315)
 	at no.oslomet.cs.algdat.Oblig2.Oblig2Test.oppgave8(Oblig2Test.java:1003)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -636,7 +637,7 @@
 <h3 class="failures">oppgave9()</h3>
 <span class="code">
 <pre>java.lang.UnsupportedOperationException
-	at no.oslomet.cs.algdat.Oblig2.DobbeltLenketListe.iterator(DobbeltLenketListe.java:278)
+	at no.oslomet.cs.algdat.Oblig2.DobbeltLenketListe.iterator(DobbeltLenketListe.java:315)
 	at no.oslomet.cs.algdat.Oblig2.Oblig2Test.oppgave9(Oblig2Test.java:1187)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -747,12 +748,12 @@
 </tr>
 <tr>
 <td class="success">oppgave2()</td>
-<td class="success">0.007s</td>
+<td class="success">0.008s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="failures">oppgave3()</td>
-<td class="failures">0.012s</td>
+<td class="failures">0.013s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
@@ -762,7 +763,7 @@
 </tr>
 <tr>
 <td class="failures">oppgave5()</td>
-<td class="failures">0.001s</td>
+<td class="failures">0.008s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
@@ -791,8 +792,6 @@
 <h2>Standard output</h2>
 <span class="code">
 <pre>Oppgave 10b: Ikke unntak for tom liste!
-Oppgave 5b: Kaster feil type unntak for indeksfeil!
-Oppgave 5d: Metoden leggInn() kaster feil type unntak!
 Oppgave 5f: Det kastes feil type unntak for null-verdier!
 Oppgave 5g: Feil i indekssjekken! 0 &lt;= indeks &lt;= antall er tillatt!
 Oppgave 6b: Indekssjekken kaster feil unntak!
@@ -810,7 +809,7 @@ Oppgave 8b: Det kastes feil type unntak!
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.4</a> at 3 Oct 2022, 15:32:41</p>
+<a href="http://www.gradle.org">Gradle 7.4</a> at 3 Oct 2022, 16:37:21</p>
 </div>
 </div>
 </body>

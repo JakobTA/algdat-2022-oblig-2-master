@@ -1,2 +1,9 @@
 # Project exclude paths
 /.gradle/
+build/tmp/compileJava/previous-compilation-data.bin
+build/test-results/test/binary/results.bin
+build/test-results/test/binary/output.bin.idx
+build/test-results/test/binary/output.bin
+build/reports/tests/test/packages/no.oslomet.cs.algdat.Oblig2.html
+build/reports/tests/test/index.html
+build/reports/tests/test/classes/no.oslomet.cs.algdat.Oblig2.Oblig2Test.html
