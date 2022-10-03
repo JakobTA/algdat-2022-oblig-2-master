@@ -79,6 +79,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     //Hjelpemetode for å returnere noden med gitt indeks
     private Node<T> finnNode(int indeks){
+        //Kontroll av indeks
+        indeksKontroll(indeks, false);
+
         //Hvis index er mindre enn antall/2 begynn fra hodet
         if(indeks < antall/2){
             Node<T> node = hode;
@@ -151,12 +154,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean inneholder(T verdi) {
-        throw new UnsupportedOperationException();
+        if(indeksTil(verdi) == -1){
+            return false;
+        }else{
+            return true;
+        }
+        //throw new UnsupportedOperationException();
     }
 
     @Override
     public T hent(int indeks) {
-        //Kontroll av indeks
+        //Kontroll av indeks. Ikke egt nødvendig siden indeks sjekkes i finnNode().
         indeksKontroll(indeks, false);
 
         Node<T> node = finnNode(indeks);
@@ -166,8 +174,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int indeksTil(T verdi) {
+        if(verdi == null)
+            return -1;
 
-        throw new UnsupportedOperationException();
+        //Variabler som lagrer valgt node
+        Node<T> node = hode;
+        //Så lenge noden ikke treffer halen, sammenlign verdier
+        for(int i = 0; i < antall; i++){
+            if(node.verdi.equals(verdi))
+                return i;
+            node = node.neste;
+        }
+        //Hvis verdien ikke finnes i listen, returner -1
+        return -1;
+        // throw new UnsupportedOperationException();
     }
 
     @Override
