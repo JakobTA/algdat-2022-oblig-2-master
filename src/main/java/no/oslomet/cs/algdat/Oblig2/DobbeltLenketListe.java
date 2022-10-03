@@ -194,7 +194,44 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        throw new UnsupportedOperationException();
+        Node<T> node = new Node<>(verdi);
+
+        indeksKontroll(indeks, false);
+        Objects.requireNonNull(verdi, "Verdi kan ikke være null!");
+
+        //Tilfelle 1 - lista er tom
+        if(tom()){
+            hode = hale = node;
+            antall++; endringer++;
+        }
+
+        //Tilfelle 2 - skal legges først
+        if(indeks == 0){
+            Node<T> neste = hode;
+            hode.neste = node; node.neste = neste;
+            neste.forrige = node; node.forrige = hode;
+        }
+
+        //Tilfelle 3 - skal legges bakerst
+        if(indeks == antall-1){
+            Node<T> forrige = hale;
+            hale.forrige = node; node.forrige = forrige;
+            forrige.neste = node; node.neste = hale;
+        }
+
+        //Tilfelle 4 - skal legges mellom to noder
+        if(indeks > 0 && indeks < antall-1){
+            //Noden som skal være før ny node
+            Node<T> før = finnNode(indeks-1);
+            //Noden som skal vøre etter ny node
+            Node<T> etter = finnNode(indeks);
+
+            node.forrige = før; før.neste = node;
+            node.neste = etter; etter.forrige = node;
+        }
+
+
+        //throw new UnsupportedOperationException();
     }
 
     @Override
@@ -224,7 +261,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         //Variabler som lagrer valgt node
         Node<T> node = hode;
-        //Så lenge noden ikke treffer halen, sammenlign verdier
+        //Går igjennom listen, sammenlign verdier, og går til neste indeks/node
         for(int i = 0; i < antall; i++){
             if(node.verdi.equals(verdi))
                 return i;
