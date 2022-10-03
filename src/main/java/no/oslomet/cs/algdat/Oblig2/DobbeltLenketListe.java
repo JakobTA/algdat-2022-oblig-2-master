@@ -97,7 +97,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //Hvis index er større eller lik antall/2 begynn fra halen. Gå bakover til noden er funnet
             Node<T> node = hale;
 
-            int i = 0;
+            int i = antall-1;
             while(i != indeks){
                 node = node.forrige;
                 i--;
@@ -107,13 +107,58 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public Liste<T> subliste(int fra, int til) {
-        throw new UnsupportedOperationException();
+
+        fratilKontroller(antall, fra, til);
+
+        Liste<T> liste = new DobbeltLenketListe<>();
+        int tablengde = til-fra;
+
+        if (tablengde < 1) {
+            return liste;
+
+        } else{
+
+            Node<T> node = finnNode(fra);
+
+            for (int i = fra; i <=til; i++){
+
+                if (tablengde > 0) {
+                    liste.leggInn(node.verdi);
+                    node = node.neste;
+                    tablengde--;
+                }
+
+            }
+            return liste;
+        }
+        //throw new UnsupportedOperationException();
+       // return liste;
     }
+
+
+        private void fratilKontroller(int antall, int fra, int til){
+            if (fra < 0)                                  // fra er negativ
+                throw new IndexOutOfBoundsException
+                        ("fra(" + fra + ") er negativ!");
+
+            if (til > antall)                          // til er utenfor tabellen
+                throw new IndexOutOfBoundsException
+                        ("til(" + til + ") > antall(" + antall + ")");
+
+            if (fra > til)                                // fra er større enn til
+                throw new IllegalArgumentException
+                        ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
+        }
+
+
+
 
     @Override
     public int antall() {
         //Bare returnerer antallet
-        return antall;//throw new UnsupportedOperationException();
+        return antall;
+
+        //throw new UnsupportedOperationException();
     }
 
     @Override
@@ -316,6 +361,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
         throw new UnsupportedOperationException();
+    }
+
+    public static void main(String[] args) {
+        Character[] c = {'A','B','C','D','E','F','G','H','I','J',};
+        DobbeltLenketListe<Character> liste = new DobbeltLenketListe<>(c);
+        System.out.println(liste.subliste(3,8));  // [D, E, F, G, H]
+        System.out.println(liste.subliste(5,5));  // []
+        System.out.println(liste.subliste(8,liste.antall()));  // [I, J]
+        // System.out.println(liste.subliste(0,11));  // skal kaste unntak
     }
 
 } // class DobbeltLenketListe
