@@ -205,22 +205,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         if(tom()){ //Tilfelle 1 - lista er tom
             hode = hale = node;
-            antall++; endringer++;
         } else if(indeks == 0){ //Tilfelle 2 - skal legges først
             hode.forrige = node; node.neste = hode;
             hode = node;
-            antall++; endringer++;
         } else if(indeks == antall){ //Tilfelle 3 - skal legges bakerst
             hale.neste = node; node.forrige = hale;
             hale = node;
-            antall++; endringer++;
-        } else{ //Tilfelle 4 - skal legges mellom to noder
-            node.neste = finnNode(indeks); node.neste.forrige = node;
-            node.forrige = finnNode(indeks-1);
-            node.forrige.neste = node;
-            antall++; endringer++;
+        } else{ //Tilfelle 4 - skal legges mellom to noder. Koden under er lånt og tilpasset fra kompendiet.
+            //Begynner på begynnelsen av listen
+            node = hode;
+            //Går igjennom listen og finner noden før indeksen
+            for (int i = 0; i < indeks; i++) node = node.neste;{
+                //Setter noden som skal inn, mellom to noder underveis
+                node = new Node<T>(verdi, node.forrige, node);
+            }
+            //Setter til slutt noden på indeks og setter korrekt pekere bak og frem
+            node.neste.forrige = node.forrige.neste = node;
         }
-
+        antall++; endringer++;
         //throw new UnsupportedOperationException();
     }
 
