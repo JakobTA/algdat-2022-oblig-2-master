@@ -194,44 +194,33 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
-        Node<T> node = new Node<>(verdi);
-
         //Sjekker om verdi er null
         Objects.requireNonNull(verdi, "Verdi kan ikke være null!");
-        //Sjekker om indeks er innenfor grensene. Å bruke indeksKontroll fungerte ikke?
-        if(indeks < 0) {
-            throw new IndexOutOfBoundsException("Indeks kan ikke være mindre enn 0!");
-        }else if(indeks > antall){
-            throw new IndexOutOfBoundsException("Indeks kan ikke være større enn antall noder!");
-        }
+        //Sjekker om indeks er innenfor grensene. Å bruke indeksKontroll ga feil i testing. Gjøres derfor slik.
+        if(indeks > antall)  throw new IndexOutOfBoundsException("Indeks kan ikke være større enn antall noder!");
+        if(indeks < 0) throw new IndexOutOfBoundsException("Indeks kan ikke være mindre enn 0!");
 
-        //Tilfelle 1 - lista er tom
-        if(tom()){
+        //Oppretter den nye noden med inn-verdien
+        Node<T> node = new Node<>(verdi, null, null);
+
+        if(tom()){ //Tilfelle 1 - lista er tom
             hode = hale = node;
             antall++; endringer++;
-        } else if(indeks == 0){
-        //Tilfelle 2 - skal legges først
-            Node<T> neste = hode;
-            hode.neste = node; node.neste = neste;
-            neste.forrige = node; node.forrige = hode;
+        } else if(indeks == 0){ //Tilfelle 2 - skal legges først
+            hode.forrige = node; node.neste = hode;
+            hode = node;
             antall++; endringer++;
-        } else if(indeks == antall-1){
-        //Tilfelle 3 - skal legges bakerst
-            Node<T> forrige = hale;
-            hale.forrige = node; node.forrige = forrige;
-            forrige.neste = node; node.neste = hale;
+        } else if(indeks == antall){ //Tilfelle 3 - skal legges bakerst
+            hale.neste = node; node.forrige = hale;
+            hale = node;
             antall++; endringer++;
-        } else{
-        //Tilfelle 4 - skal legges mellom to noder
-            //Noden som skal være før ny node
-            Node<T> før = finnNode(indeks-1);
-            //Noden som skal vøre etter ny node
-            Node<T> etter = finnNode(indeks);
-
-            node.forrige = før; før.neste = node;
-            node.neste = etter; etter.forrige = node;
+        } else{ //Tilfelle 4 - skal legges mellom to noder
+            node.neste = finnNode(indeks); node.neste.forrige = node;
+            node.forrige = finnNode(indeks-1);
+            node.forrige.neste = node;
             antall++; endringer++;
         }
+
         //throw new UnsupportedOperationException();
     }
 
@@ -247,7 +236,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T hent(int indeks) {
-        //Kontroll av indeks. Ikke egt nødvendig siden indeks sjekkes i finnNode().
+        //Kontroll av indeks. Ikke egt nødvendig siden indeks sjekkes i finnNode(), men oppgaven spør etter det.
         indeksKontroll(indeks, false);
 
         Node<T> node = finnNode(indeks);
