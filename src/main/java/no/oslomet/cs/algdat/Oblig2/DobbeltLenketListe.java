@@ -308,7 +308,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         while(p!=null){
             q = p.neste;
-            p.neste = null;
+            p.forrige = p.neste = null;
             p.verdi = null;
             p = q;
         }
