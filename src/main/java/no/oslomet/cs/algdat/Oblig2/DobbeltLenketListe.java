@@ -307,14 +307,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         Node<T> p = hode, q = null;
 
         while(p!=null){
-            q=p.neste;
+            q = p.neste;
             p.neste = null;
-            p.verdi=null;
-            p=q;
+            p.verdi = null;
+            p = q;
         }
 
-        hode=hale=null;
-        antall=0;
+        hode = hale = null;
+        antall = 0;
+        endringer++;
     }
 
     @Override
