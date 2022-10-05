@@ -179,14 +179,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //Hvis listen er tom, la hode og hale peke til den første nye noden
         if(tom()){
             hode = hale = node;
-            antall++; endringer++;
+            antall++;
+            endringer++;
             return true;
         //Hvis ikke, begynn på slutten, sett nodes pekere etter hale og flytt halens pekere til noden og flytt halen
         }else{
             node.forrige = hale;
             hale.neste = node;
             hale = node;
-            antall++; endringer++;
+            antall++;
+            endringer++;
             return true;
         }
         //throw new UnsupportedOperationException();
@@ -407,6 +409,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //throw new UnsupportedOperationException();
     }
 
+
+
     @Override
     public Iterator<T> iterator() {
         throw new UnsupportedOperationException();
@@ -448,16 +452,42 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     } // class DobbeltLenketListeIterator
 
+    //oppgave 10
+    //bruker inpserasjon fra kompendiet Kap1.
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
-        throw new UnsupportedOperationException();
+
+        if(liste.antall() > 1){
+            int antall_elementer = liste.antall();
+            int maksindeks = 0;
+
+            for(int i = antall_elementer; i > 1; i--){
+
+                T maksverdi = liste.hent(0);
+                for(int j = 1; j < i; j++){
+                    if(c.compare(liste.hent(j),maksverdi)> 0){
+                        maksverdi = liste.hent(j);
+                        maksindeks = j;
+                    }
+                }
+                T tempMaks = liste.hent(maksindeks);
+                T tempSiste = liste.hent(i-1);
+                liste.oppdater(maksindeks,tempSiste);
+                liste.oppdater(i-1,maksverdi);
+
+            }
+
+        }
+        else{
+            return;//throw new UnsupportedOperationException();
+        }
     }
 
     public static void main(String[] args) {
         String[] s = {"Ole", null, "Per", "Kari", null};
         Liste<String> liste = new DobbeltLenketListe<>(s);
-        System.out.println(liste.fjern("Ole"));
-        System.out.println(liste.fjern(2));
-
+        System.out.println(liste);
+        liste.oppdater(0,"Bjørn");
+        System.out.println(liste);
     }
 
 } // class DobbeltLenketListe
