@@ -285,23 +285,40 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //throw new UnsupportedOperationException();
         if (verdi == null) return false;          // ingen nullverdier i listen
 
-        Node<T> q = hode, p = null;               // hjelpepekere
+        Node<T> q = hode;           // hjelpepekere
 
         while (q != null)                         // q skal finne verdien t
         {
             if (q.verdi.equals(verdi)) break;       // verdien funnet
-            p = q; q = q.neste;                     // p er forgjengeren til q
+
         }
 
-        if (q == null) return false;              // fant ikke verdi
-        else if (q == hode) hode = hode.neste;    // går forbi q
-        else p.neste = q.neste;                   // går forbi q
+        q=q.neste;
 
-        if (q == hale) hale = p;                  // oppdaterer hale
+
+        if (q == null) return false;              // fant ikke verdi
+        if (q == hode) hode = hode.neste;    // går forbi q
+
+        if (hode!=null){
+            hode.forrige=null;
+        }
+        else{
+            hale=null;
+        }
+
+        if (q == hale) {
+            hale = hale.forrige;
+            hale.neste = null;
+        }
+        else {
+            q.forrige.neste=q.neste;
+            q.neste.forrige=q.forrige;
+        }
 
         q.verdi = null;                           // nuller verdien til q
-        q.neste = null;                           // nuller nestepeker
+        q.forrige = q.neste=null;                           // nuller nestepeker
 
+        endringer++;                              // fjerning er en endring
         antall--;                                 // en node mindre i listen
 
         return true;                              // vellykket fjerning
@@ -311,8 +328,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public T fjern(int indeks) {
 
         //throw new UnsupportedOperationException();
-
-        indeksKontroll(indeks, false);  // Se Liste, false: indeks = antall er ulovlig
+        indeksKontroll(indeks, false);  // false: indeks = antall er ulovlig
 
         T temp;                              // hjelpevariabel
 
@@ -320,20 +336,25 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         {
             temp = hode.verdi;                 // tar vare på verdien som skal fjernes
             hode = hode.neste;                 // hode flyttes til neste node
+
             if (antall == 1) hale = null;      // det var kun en verdi i listen
         }
         else
         {
             Node<T> p = finnNode(indeks - 1);  // p er noden foran den som skal fjernes
             Node<T> q = p.neste;               // q skal fjernes
+
             temp = q.verdi;                    // tar vare på verdien som skal fjernes
 
             if (q == hale) hale = p;           // q er siste node
+
             p.neste = q.neste;                 // "hopper over" q
         }
 
+        endringer++;                         // fjerning er en endring
         antall--;                            // reduserer antallet
-        return temp;                         // returner fjernet verdi
+
+        return temp;
     }
 
     @Override
@@ -456,7 +477,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         String[] s = {"Ole", null, "Per", "Kari", null};
         Liste<String> liste = new DobbeltLenketListe<>(s);
         System.out.println(liste.fjern("Ole"));
-        System.out.println(liste.fjern(2));
+        System.out.println(liste.fjern(1));
 
     }
 
