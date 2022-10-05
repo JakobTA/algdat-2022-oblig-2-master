@@ -330,25 +330,41 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //throw new UnsupportedOperationException();
         indeksKontroll(indeks, false);  // false: indeks = antall er ulovlig
 
+        Node<T> p = hode;
         T temp;                              // hjelpevariabel
 
         if (indeks == 0)                     // skal første verdi fjernes?
         {
-            temp = hode.verdi;                 // tar vare på verdien som skal fjernes
-            hode = hode.neste;                 // hode flyttes til neste node
+            temp = p.verdi;
+            //hode = hode.neste;                 // hode flyttes til neste node
 
-            if (antall == 1) hale = null;      // det var kun en verdi i listen
+            if (p.neste != null) {   // det var kun en verdi i listen
+                hode = p.neste;
+                hode.forrige = null;
+            } else {
+                hode = null;
+                hale = null;
+            }
         }
-        else
-        {
-            Node<T> p = finnNode(indeks - 1);  // p er noden foran den som skal fjernes
-            Node<T> q = p.neste;               // q skal fjernes
+        else if(indeks == antall-1) {
+            p = hale;
+            temp = hale.verdi;
+            hale = p.forrige;
+            hale.neste = null;
+        }
 
-            temp = q.verdi;                    // tar vare på verdien som skal fjernes
+            else{
+            //if (q == hale) hale = p;
+            for (int i =0;i<indeks;i++){
+                p=p.neste;
+            }
+            temp = p.verdi;
+            p.forrige.neste=p.neste;
+            p.neste.forrige=p.forrige;
 
-            if (q == hale) hale = p;           // q er siste node
 
-            p.neste = q.neste;                 // "hopper over" q
+
+            //p.neste = q.neste;
         }
 
         endringer++;                         // fjerning er en endring
@@ -476,8 +492,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public static void main(String[] args) {
         String[] s = {"Ole", null, "Per", "Kari", null};
         Liste<String> liste = new DobbeltLenketListe<>(s);
-        System.out.println(liste.fjern("Ole"));
-        System.out.println(liste.fjern(1));
+        System.out.println(liste.fjern("Ole" + " " + liste.fjern(0)));
+        System.out.println(liste.fjern(0));
 
     }
 
