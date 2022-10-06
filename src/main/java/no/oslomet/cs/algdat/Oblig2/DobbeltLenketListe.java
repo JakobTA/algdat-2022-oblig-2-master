@@ -13,7 +13,7 @@ import java.util.Objects;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
-
+//hei
     /**
      * Node class
      *
