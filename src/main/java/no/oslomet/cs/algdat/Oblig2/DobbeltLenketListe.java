@@ -437,7 +437,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
         private DobbeltLenketListeIterator(int indeks) {
-            throw new UnsupportedOperationException();
+            denne = finnNode(indeks); // Den skal sette pekeren denne til den noden som hører til den oppgitte indeksen.
+            //. Resten skal være som i den konstruktøren som er ferdigkodet
+            fjernOK = false;
+            iteratorendringer = endringer;
+
+            //throw new UnsupportedOperationException();
         }
 
         @Override
@@ -448,15 +453,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         @Override
         public T next() {
 
-
+            if(!hasNext()){
+                throw new NoSuchElementException("Tomt eller ingen verider igjen"); // Så en NoSuchElementException hvis det ikke er flere igjen i listen (dvs. hvis hasNext() ikke er sann/true).
+            }
             //Lag metoden T next(). Den skal først sjekke om iteratorendringer er lik endringer.
             if(iteratorendringer != endringer){
                 throw new ConcurrentModificationException(); //Hvis ikke, kastes en ConcurrentModificationException.
             }
             //henter inspirasjon fra kompendiet programkode 3.2.4 c) public T next()
-            if(!hasNext()){
-                throw new NoSuchElementException("Tomt eller ingen verider igjen"); // Så en NoSuchElementException hvis det ikke er flere igjen i listen (dvs. hvis hasNext() ikke er sann/true).
-            }
+
 
             // Deretter
             //settes fjernOK til sann/true, verdien til denne returneres og denne flyttes til den neste node.
