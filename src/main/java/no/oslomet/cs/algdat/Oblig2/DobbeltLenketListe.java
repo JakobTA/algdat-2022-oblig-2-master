@@ -6,9 +6,7 @@ package no.oslomet.cs.algdat.Oblig2;
 
 import org.w3c.dom.ls.LSOutput;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
@@ -413,7 +411,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public Iterator<T> iterator() {
-        throw new UnsupportedOperationException();
+        //insperiasjon fra kompendiet programkode Programkode 3.3.4 e)
+
+        //Lag metoden Iterator<T> iterator(). Den skal returnere en instans av iteratorklassen.
+        return new DobbeltLenketListeIterator();
+
+        //throw new UnsupportedOperationException();
     }
 
     public Iterator<T> iterator(int indeks) {
@@ -425,10 +428,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         private boolean fjernOK;
         private int iteratorendringer;
 
+
         private DobbeltLenketListeIterator() {
             denne = hode;     // p starter på den første i listen
             fjernOK = false;  // blir sann når next() kalles
             iteratorendringer = endringer;  // teller endringer
+
         }
 
         private DobbeltLenketListeIterator(int indeks) {
@@ -442,7 +447,24 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public T next() {
-            throw new UnsupportedOperationException();
+
+
+            //Lag metoden T next(). Den skal først sjekke om iteratorendringer er lik endringer.
+            if(iteratorendringer != endringer){
+                throw new ConcurrentModificationException(); //Hvis ikke, kastes en ConcurrentModificationException.
+            }
+            //henter inspirasjon fra kompendiet programkode 3.2.4 c) public T next()
+            if(!hasNext()){
+                throw new NoSuchElementException("Tomt eller ingen verider igjen"); // Så en NoSuchElementException hvis det ikke er flere igjen i listen (dvs. hvis hasNext() ikke er sann/true).
+            }
+
+            // Deretter
+            //settes fjernOK til sann/true, verdien til denne returneres og denne flyttes til den neste node.
+            fjernOK = true;
+            denne = denne.neste;
+            return denne.verdi;
+
+            //throw new UnsupportedOperationException();
         }
 
         @Override
@@ -453,15 +475,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     } // class DobbeltLenketListeIterator
 
     //oppgave 10
-    //bruker inpserasjon fra kompendiet Kap1.
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
 
-        if(liste.antall() > 1){
-            int antall_elementer = liste.antall();
-            int maksindeks = 0;
+        if(liste.antall() > 1){ // sjekker om antall elementer i listen er mer enn 1. Hvis den er det, så kjøres koden.
+            int antall_elementer = liste.antall(); // tilordner antall elementer
 
+
+            //har kodet utvalgssortering
             for(int i = antall_elementer; i > 1; i--){
-
+                //maks metoden
+                int maksindeks = 0;
                 T maksverdi = liste.hent(0);
                 for(int j = 1; j < i; j++){
                     if(c.compare(liste.hent(j),maksverdi)> 0){
@@ -469,6 +492,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                         maksindeks = j;
                     }
                 }
+                //bytt metoden.
                 T tempMaks = liste.hent(maksindeks);
                 T tempSiste = liste.hent(i-1);
                 liste.oppdater(maksindeks,tempSiste);
@@ -483,11 +507,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public static void main(String[] args) {
-        String[] s = {"Ole", null, "Per", "Kari", null};
-        Liste<String> liste = new DobbeltLenketListe<>(s);
-        System.out.println(liste);
-        liste.oppdater(0,"Bjørn");
-        System.out.println(liste);
+        Integer[] s = {8, 5, 2, 11, 7, 3, 15, 14, 10, 17, 18, 9, 4, 12, 13, 19, 20, 1, 16, 6};
+        String [] navn = {"G", "B", "F", "C", "E", "D", "A"};
+        Liste<Integer> l1 = new DobbeltLenketListe<>(s);
+        Liste<String> l2 = new DobbeltLenketListe<>(navn);
+        System.out.println(l1);
+        DobbeltLenketListe.sorter(l1,Comparator.naturalOrder());
+        System.out.println(l1);
+        System.out.println("");
+        System.out.println(l2);
+        DobbeltLenketListe.sorter(l2,Comparator.naturalOrder());
+        System.out.println(l2);
     }
 
 } // class DobbeltLenketListe
