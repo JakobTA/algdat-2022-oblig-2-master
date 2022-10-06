@@ -520,6 +520,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public void remove() {
+            //Oppretter noden vil skal bruke for å navigere oss i listen og ordne pekere
+            Node<T> node = null;
+            //Sjekker hva "denne" egentlig er på i listen
+            if(denne == null) {
+                //Dette betyr at den hare hale som forrige
+                node = hale;
+            }else{
+                //Hvis den ikke er dette betyr det at vi kan sette node som den til venstre for "denne"
+                node = denne.forrige;
+            }
+
             //Først sjekker vi om vi har lov til å kalle på metoden nå
             if(!fjernOK)
                 throw new IllegalStateException("Metoden kan ikke gjennomføres akkurat nå!");
@@ -530,14 +541,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
             if(antall == 1){ //Tilfelle 1 - Vi har bare én node
                 hode = hale = null;
-            } else if(denne == null){ //Tilfelle 2 - Siste node skal fjernes
+            } else if(node == hale){ //Tilfelle 2 - Siste node skal fjernes
                 hale = hale.forrige; hale.neste = null;
-            } else if(denne == hode){ //Tilfelle 3 - Første node skal fjernes og det er flere enn én node i listen
+            } else if(node == hode){ //Tilfelle 3 - Første node skal fjernes og det er flere enn én node i listen
                 hode = hode.neste; hode.forrige = null;
             } else{ //Tilfelle 4 - Vi skal fjerne en node midt i listen (Til venstre for noden i midten)
-                denne = denne.forrige;
-                denne.neste.forrige = denne.forrige;
-                denne.forrige.neste = denne.neste;
+                node.neste.forrige = node.forrige;
+                node.forrige.neste = node.neste;
             }
 
             //Oppdaterer til slutt endringer
