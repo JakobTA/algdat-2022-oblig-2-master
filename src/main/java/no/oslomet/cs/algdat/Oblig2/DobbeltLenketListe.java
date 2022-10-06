@@ -420,7 +420,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public Iterator<T> iterator(int indeks) {
-        throw new UnsupportedOperationException();
+        indeksKontroll(indeks, false);
+        return new DobbeltLenketListeIterator();
+        //throw new UnsupportedOperationException();
     }
 
     private class DobbeltLenketListeIterator implements Iterator<T> {
@@ -433,7 +435,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             denne = hode;     // p starter på den første i listen
             fjernOK = false;  // blir sann når next() kalles
             iteratorendringer = endringer;  // teller endringer
-
         }
 
         private DobbeltLenketListeIterator(int indeks) {
@@ -441,12 +442,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             //. Resten skal være som i den konstruktøren som er ferdigkodet
             fjernOK = false;
             iteratorendringer = endringer;
-
             //throw new UnsupportedOperationException();
         }
 
         @Override
         public boolean hasNext() {
+
             return denne != null;
         }
 
@@ -466,8 +467,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             // Deretter
             //settes fjernOK til sann/true, verdien til denne returneres og denne flyttes til den neste node.
             fjernOK = true;
+            T denneVerdien = denne.verdi;
             denne = denne.neste;
-            return denne.verdi;
+            return denneVerdien;
+
 
             //throw new UnsupportedOperationException();
         }
@@ -512,17 +515,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     public static void main(String[] args) {
-        Integer[] s = {8, 5, 2, 11, 7, 3, 15, 14, 10, 17, 18, 9, 4, 12, 13, 19, 20, 1, 16, 6};
-        String [] navn = {"G", "B", "F", "C", "E", "D", "A"};
-        Liste<Integer> l1 = new DobbeltLenketListe<>(s);
-        Liste<String> l2 = new DobbeltLenketListe<>(navn);
-        System.out.println(l1);
-        DobbeltLenketListe.sorter(l1,Comparator.naturalOrder());
-        System.out.println(l1);
-        System.out.println("");
-        System.out.println(l2);
-        DobbeltLenketListe.sorter(l2,Comparator.naturalOrder());
-        System.out.println(l2);
+        String[] navn = {"Lars","Anders","Bodil","Kari","Per","Berit"};
+        Liste<String> liste = new DobbeltLenketListe<>(navn);
+        liste.forEach(s -> System.out.print(s + " "));
+        System.out.println();
+        for (String s : liste) System.out.print(s + " ");
     }
 
 } // class DobbeltLenketListe
