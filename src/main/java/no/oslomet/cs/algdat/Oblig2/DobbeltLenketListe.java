@@ -238,8 +238,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public T hent(int indeks) {
-        //Kontroll av indeks. Ikke egt nødvendig siden indeks sjekkes i finnNode(), men oppgaven spør etter det.
-        indeksKontroll(indeks, false);
+        //Ikke egt nødvendig med en indeksKontroll her siden indeks sjekkes i finnNode(), men oppgaven spør etter det.
+        //indeksKontroll(indeks, false);
 
         Node<T> node = finnNode(indeks);
         return node.verdi;
@@ -248,6 +248,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int indeksTil(T verdi) {
+        //Sjekk med en gang om verdi er lik null
         if(verdi == null)
             return -1;
 
@@ -272,7 +273,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //Lagrer nodens gamle verdi
         T gammel = hent(indeks);
 
-        //Går setter ny verdi på noden
+        //Gir noden den nye verdien
         finnNode(indeks).verdi = nyverdi;
 
         endringer++;
@@ -393,20 +394,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         s.append('[');
 
         //Så lenge den lenkede listen ikke er tom gjør følgende.
-        if (!tom())
-        {
+        if(!tom()){
             //Begynn med noden som hodet peker på, legg verdien inn i strengen
-            Node<T> p = hode;
-            s.append(p.verdi);
+            Node<T> node = hode;
+            s.append(node.verdi);
 
             //Valgt node endres til neste node i listen
-            p = p.neste;
+            node = node.neste;
 
             //Så lenge noden ikke er null, legg resten av listens elementer til i strengen.
-            while (p != null)
-            {
-                s.append(',').append(' ').append(p.verdi);
-                p = p.neste;
+            while(node != null){
+                s.append(',').append(' ').append(node.verdi);
+                node = node.neste;
             }
         }
         //Legg til slutt-bracket og returner den konstruerte strengen
@@ -420,17 +419,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         StringBuilder s = new StringBuilder();
         s.append('[');
 
-        if (!tom())
-        {
-            Node<T> p = hale;
-            s.append(p.verdi);
+        if(!tom()){
+            Node<T> node = hale;
+            s.append(node.verdi);
 
-            p = p.forrige;
+            node = node.forrige;
 
-            while (p != null)
-            {
-                s.append(',').append(' ').append(p.verdi);
-                p = p.forrige;
+            while(node != null){
+                s.append(',').append(' ').append(node.verdi);
+                node = node.forrige;
             }
         }
         s.append(']');
@@ -452,7 +449,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public Iterator<T> iterator(int indeks) {
 
-
         indeksKontroll(indeks,false);//Det må først sjekkes at
         //indeksen er lovlig. Bruk metoden indeksKontroll().
         new DobbeltLenketListeIterator();
@@ -463,8 +459,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         return it;
 
-
-
         //throw new UnsupportedOperationException();
     }
 
@@ -472,7 +466,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         private Node<T> denne;
         private boolean fjernOK;
         private int iteratorendringer;
-
 
         private DobbeltLenketListeIterator() {
             denne = hode;     // p starter på den første i listen
@@ -563,7 +556,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if(liste.antall() > 1){ // sjekker om antall elementer i listen er mer enn 1. Hvis den er det, så kjøres koden.
             int antall_elementer = liste.antall(); // tilordner antall elementer
 
-
             //har kodet utvalgssortering
             for(int i = antall_elementer; i > 1; i--){
                 //maks metoden
@@ -580,9 +572,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 T tempSiste = liste.hent(i-1);
                 liste.oppdater(maksindeks,tempSiste);
                 liste.oppdater(i-1,maksverdi);
-
             }
-
         }
         else{
             return;//throw new UnsupportedOperationException();
