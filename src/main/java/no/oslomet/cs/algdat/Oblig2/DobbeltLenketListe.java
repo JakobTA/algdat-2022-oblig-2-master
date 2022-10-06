@@ -288,7 +288,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //throw new UnsupportedOperationException();
         if (verdi == null) return false;          // ingen nullverdier i listen
 
-        Node<T> q = hode, p = null;               // hjelpepekere
+        Node<T> q = hode;            // hjelpepekere
 
         while (q != null)                         // q skal finne verdien t
         {
@@ -318,7 +318,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             q.neste.forrige = q.forrige;
         }
 
-        q.verdi = null;
+        q.verdi = null;               //husk å sette pekerne lik null!
         q.forrige = q.neste = null;
 
         antall--;                                 // en node mindre i listen
@@ -333,14 +333,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //throw new UnsupportedOperationException();
 
         indeksKontroll(indeks, false);  // Se Liste, false: indeks = antall er ulovlig
-        /*if(antall == 0 )
-            throw new IndexOutOfBoundsException();*/
+
         Node<T> peker = hode;                             // hjelpevariabel PEKER FJERNER
 
-        if (antall == 1) {          //tilfelle 2
+        if (antall == 1) {          //tilfelle 1
             hode = hale = null;    // det var kun en verdi i listen
         }
-                                              //tilfelle 1
+                                              //tilfelle 2
         else if (indeks == 0)                     // skal første verdi fjernes?
         {
 
@@ -363,7 +362,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             peker.neste.forrige = peker.forrige; //setter opp neste peker
         }
 
-        T verdi = peker.verdi;
+        T verdi = peker.verdi;       //husk å sette pekerne lik null!!
         peker.verdi = null;
         peker.forrige = peker.neste = null;
         antall--;                            // reduserer antallet
@@ -518,15 +517,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
     }
 
-    public static void main(String[] args) {
-        String[] s = {"Ole", null, "Per", "Kari", null};
-        Liste<String> liste = new DobbeltLenketListe<>(s);
-        System.out.println(liste);
-        liste.fjern("Ole");
-        System.out.println(liste);
-       liste.fjern(2);
-        System.out.println(liste);
-    }
 
 } // class DobbeltLenketListe
 
