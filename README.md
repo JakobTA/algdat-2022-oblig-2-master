@@ -10,11 +10,11 @@ Oppgaven er levert av følgende studenter:
 # Arbeidsfordeling
 
 I oppgaven har vi hatt følgende arbeidsfordeling:
+* Diba har hatt hovedansvar for oppgave 4b, 6, 7.
+* Jakob har hatt hovedansvar for oppgave 3, 4a, 5 og 9.
+* Ali har hatt hovedansvar for oppgave 2, 8, 10.
 * Sultan har hatt hovedansvar for oppgave
-* Diba har hatt hovedansvar for oppgave
-* Jakob har hatt hovedansvar for oppgave
-* Ali har hatt hovedansvar for oppgave
-* Vi har i fellesskap løst oppgave 10. 
+* Vi har i fellesskap løst oppgave 1 / (vi diskuterte og hjalp hverandre på flere av de andre oppgavene også).
 
 # Oppgavebeskrivelse
 
