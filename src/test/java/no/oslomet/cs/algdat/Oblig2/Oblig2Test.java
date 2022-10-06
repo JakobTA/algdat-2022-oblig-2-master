@@ -1034,6 +1034,7 @@ class Oblig2Test {
             k++;
         }
 
+
         i = liste.iterator();
         liste.fjern(0); // bruker fjern(indeks) etter at iteratoren er opprettet
 
