@@ -8,6 +8,7 @@ import org.w3c.dom.ls.LSOutput;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 
@@ -292,19 +293,36 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         while (q != null)                         // q skal finne verdien t
         {
             if (q.verdi.equals(verdi)) break;       // verdien funnet
-            p = q; q = q.neste;                     // p er forgjengeren til q
+            q = q.neste;                     // p er forgjengeren til q
         }
 
         if (q == null) return false;              // fant ikke verdi
-        else if (q == hode) hode = hode.neste;    // går forbi q
-        else p.neste = q.neste;                   // går forbi q
 
-        if (q == hale) hale = p;                  // oppdaterer hale
+        else if (antall==1){           //lengde lik 1
+            hode=hale=null;
+        }
 
-        q.verdi = null;                           // nuller verdien til q
-        q.neste = null;                           // nuller nestepeker
+        else if (q == hode ){ //fjerne først
+            hode = hode.neste;
+            hode.forrige = null;
+
+        }
+
+        else if (q == hale) {  //fjerne sist
+            hale = hale.forrige;
+            hale.neste = null;
+        }
+
+        else{                  // fjerne i midten
+            q.forrige.neste = q.neste;
+            q.neste.forrige = q.forrige;
+        }
+
+        q.verdi = null;
+        q.forrige = q.neste = null;
 
         antall--;                                 // en node mindre i listen
+        endringer++;
 
         return true;                              // vellykket fjerning
     }
@@ -315,27 +333,42 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //throw new UnsupportedOperationException();
 
         indeksKontroll(indeks, false);  // Se Liste, false: indeks = antall er ulovlig
+        /*if(antall == 0 )
+            throw new IndexOutOfBoundsException();*/
+        Node<T> peker = hode;                             // hjelpevariabel PEKER FJERNER
 
-        T temp;                              // hjelpevariabel
-
-        if (indeks == 0)                     // skal første verdi fjernes?
-        {
-            temp = hode.verdi;                 // tar vare på verdien som skal fjernes
-            hode = hode.neste;                 // hode flyttes til neste node
-            if (antall == 1) hale = null;      // det var kun en verdi i listen
+        if (antall == 1) {          //tilfelle 2
+            hode = hale = null;    // det var kun en verdi i listen
         }
-        else
+                                              //tilfelle 1
+        else if (indeks == 0)                     // skal første verdi fjernes?
         {
-            Node<T> p = finnNode(indeks - 1);  // p er noden foran den som skal fjernes
-            Node<T> q = p.neste;               // q skal fjernes
-            temp = q.verdi;                    // tar vare på verdien som skal fjernes
 
-            if (q == hale) hale = p;           // q er siste node
-            p.neste = q.neste;                 // "hopper over" q
+            hode = hode.neste;              // hode flyttes til neste node
+            hode.forrige=null;              //hode sin forrige settes til null
         }
 
+                                     //tilfelle 3
+        else if (indeks == antall-1){    //fjerner siste verdi i listen
+            peker = hale;
+            hale = hale.forrige;
+            hale.neste = null;
+
+        }
+
+       else{
+                                                             //tilfelle 4
+            peker = finnNode(indeks);       //fjerner verdi som er midt i lista, verken først, sist eller kun 1 element i lista
+            peker.forrige.neste = peker.neste; //forrige peker
+            peker.neste.forrige = peker.forrige; //setter opp neste peker
+        }
+
+        T verdi = peker.verdi;
+        peker.verdi = null;
+        peker.forrige = peker.neste = null;
         antall--;                            // reduserer antallet
-        return temp;                         // returner fjernet verdi
+        endringer++;
+        return verdi;                         // returner fjernet verdi
     }
 
     @Override
@@ -363,17 +396,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         StringBuilder s = new StringBuilder();
         s.append('[');
 
+        // Node<T> p = hode;
         //Så lenge den lenkede listen ikke er tom gjør følgende.
         if (!tom())
         {
             //Begynn med noden som hodet peker på, legg verdien inn i strengen
-            Node<T> p = hode;
-            s.append(p.verdi);
+
+            s.append(hode.verdi);
 
             //Valgt node endres til neste node i listen
-            p = p.neste;
+            //p = p.neste;
 
             //Så lenge noden ikke er null, legg resten av listens elementer til i strengen.
+
+            Node<T> p = hode.neste;
             while (p != null)
             {
                 s.append(',').append(' ').append(p.verdi);
@@ -486,7 +522,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         String[] s = {"Ole", null, "Per", "Kari", null};
         Liste<String> liste = new DobbeltLenketListe<>(s);
         System.out.println(liste);
-        liste.oppdater(0,"Bjørn");
+        liste.fjern("Ole");
+        System.out.println(liste);
+       liste.fjern(2);
         System.out.println(liste);
     }
 
