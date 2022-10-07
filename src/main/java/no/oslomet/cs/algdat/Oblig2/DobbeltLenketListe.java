@@ -578,20 +578,5 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             return;//throw new UnsupportedOperationException();
         }
     }
-
-    public static void main(String[] args) {
-        Integer[] s = {8, 5, 2, 11, 7, 3, 15, 14, 10, 17, 18, 9, 4, 12, 13, 19, 20, 1, 16, 6};
-        String [] navn = {"G", "B", "F", "C", "E", "D", "A"};
-        Liste<Integer> l1 = new DobbeltLenketListe<>(s);
-        Liste<String> l2 = new DobbeltLenketListe<>(navn);
-        System.out.println(l1);
-        DobbeltLenketListe.sorter(l1,Comparator.naturalOrder());
-        System.out.println(l1);
-        System.out.println("");
-        System.out.println(l2);
-        DobbeltLenketListe.sorter(l2,Comparator.naturalOrder());
-        System.out.println(l2);
-    }
-
 } // class DobbeltLenketListe
 
