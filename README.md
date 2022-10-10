@@ -25,7 +25,16 @@ legg til node med valgt tabell-verdi. Gjør dette til vi er tomme for
 elementer i a. tom() og antall() returnerer bare true om antall == 0 og
 returnerer antallet selv.
 
-I oppgave 2 så brukte vi en ... til å ...
+I oppgave 2a begynner vi i toString()-metoden med å sette opp en ny String s med stringbuilder 
+metoden. Legger til en klammeparentes og sjekker om listen er tom eller ikke. Er den tom, 
+legges sluttparentesen til og s returneres. Hvis ikke tom, legg første nodes verdi 
+inn i s og gå videre til neste node. Gå så igjennom resten, legg til komma mellom verdier, og 
+legg til neste verdi. Metoden omvendtString() følger samme mønster, men bruker pekere til forrige 
+istedenfor neste, og bygger strengen med innholdet reversjert.
+2b begynner med en null-verdi-sjekk og en opprettelse av node med inn-verdien.
+I denne metoden skal vi bare legge til noden bakerst og det holder derfor med å 
+sjekke om listen er tom eller ikke. Er den tom, sett hale og hode = noden. Er den 
+ikke tom, koble nodens pekere til halen og flytt halen. Oppdater antall og endringer.
 
 I oppgave 3a utføres først en indeksKontroll, så sjekkes det om indeksen
 ligger i første eller andre halvdel av listen. Avhengig av dette, begynner vi

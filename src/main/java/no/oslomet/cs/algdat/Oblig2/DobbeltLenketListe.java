@@ -10,7 +10,6 @@ import java.util.*;
 
 
 public class DobbeltLenketListe<T> implements Liste<T> {
-//hei
     /**
      * Node class
      *
