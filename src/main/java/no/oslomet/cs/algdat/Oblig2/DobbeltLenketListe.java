@@ -108,26 +108,25 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         fratilKontroller(antall, fra, til);
 
-        Liste<T> liste = new DobbeltLenketListe<>();
+        Liste<T> liste = new DobbeltLenketListe<>(); //oppretter ny liste
         int tablengde = til-fra;
 
-        if (tablengde < 1) {
+        if (tablengde < 1) {  //om lengden er mindre enn 1 returnerer vi selve lista igjen
             return liste;
 
         } else{
 
-            Node<T> node = finnNode(fra);
+            Node<T> node = finnNode(fra);  //oppretter node som starter på fra
 
-            for (int i = fra; i <=til; i++){
+            for (int i = fra; i <til; i++){  //forløkke som looper igjennom lista, starter på fra og er mindre enn til pga intervallet
 
-                if (tablengde > 0) {
+                if (tablengde > 0) {  //hvis lengden større enn 0 legger vi inn node.verdi
                     liste.leggInn(node.verdi);
-                    node = node.neste;
-                    tablengde--;
+                    node = node.neste; //deretter skriver vi node=node.neste for å komme til neste verdi i liste
+                    tablengde--; // lengden blir en mindre, så fortsetter vi loopen igjen
                 }
-
             }
-            return liste;
+            return liste; //returnerer listen
         }
         //throw new UnsupportedOperationException();
        // return liste;
@@ -278,32 +277,32 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //throw new UnsupportedOperationException();
         if (verdi == null) return false;          // ingen nullverdier i listen
 
-        Node<T> q = hode;            // hjelpepekere
+        Node<T> q = hode;            // hjelpepeker, setter q til å være peker til hode
 
-        while (q != null)                         // q skal finne verdien t
+        while (q != null)                         // om q ikke er null
         {
-            if (q.verdi.equals(verdi)) break;       // verdien funnet
-            q = q.neste;                     // p er forgjengeren til q
+            if (q.verdi.equals(verdi)) break;       // verdien funnet med engang
+            q = q.neste;                     // peker peker på neste verdi for å fjerne verdien som er pekt på
         }
 
         if (q == null) return false;              // fant ikke verdi
 
-        else if (antall==1){           //lengde lik 1
+        else if (antall==1){           //lengde lik 1 så setter vi hode=hale=null aka fjerner verdien
             hode=hale=null;
         }
 
-        else if (q == hode ){ //fjerne først
-            hode = hode.neste;
-            hode.forrige = null;
+        else if (q == hode ){ //fjerne først verdien i lista
+            hode = hode.neste; //hode blir da neste i lista
+            hode.forrige = null; //fordi verdien er først i lista blir forrige null
 
         }
 
-        else if (q == hale) {  //fjerne sist
-            hale = hale.forrige;
-            hale.neste = null;
+        else if (q == hale) {  //fjerne siste verdien i lista
+            hale = hale.forrige; //hale. forrige blir siste
+            hale.neste = null; //hale.neste er null fordi veriden er den siste i lista
         }
 
-        else{                  // fjerne i midten
+        else{                                  // fjerne i midten
             q.forrige.neste = q.neste;
             q.neste.forrige = q.forrige;
         }
@@ -312,7 +311,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         q.forrige = q.neste = null;
 
         antall--;                                 // en node mindre i listen
-        endringer++;
+        endringer++;                             //økt med en endring
 
         return true;                              // vellykket fjerning
     }
@@ -365,18 +364,18 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         //throw new UnsupportedOperationException();
 
-        Node<T> p = hode, q = null;
+        Node<T> p = hode, q = null; //opprette peker til hode og null
 
         while(p!=null){
-            q = p.neste;
-            p.forrige = p.neste = null;
-            p.verdi = null;
-            p = q;
+            q = p.neste;  //null peker lik p sin neste
+            p.forrige = p.neste = null; //både foran og bak p er null
+            p.verdi = null; //verdien er null
+            p = q; //begge er null
         }
 
         hode = hale = null;
         antall = 0;
-        endringer++;
+        endringer++;  //økt med en endring
     }
 
     @Override

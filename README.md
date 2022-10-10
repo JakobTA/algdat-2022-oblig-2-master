@@ -31,7 +31,15 @@ I oppgave 3a utføres først en indeksKontroll, så sjekkes det om indeksen
 ligger i første eller andre halvdel av listen. Avhengig av dette, begynner vi
 enten på hode eller hale, og beveger oss innover til vi finner noden med
 ønsket indeks. Returner denne.
-I oppgave 3b ...
+
+I oppgave 3b skal vi returnere en liste som inneholder verdiene [fra:til>. Det første som skjer er
+å sjekke en fratilKontroller for å sjekke om fra og til er lovlige. fratilKontrolleren er en metode jeg har limt inn fra
+tidligere ukesoppgaver jeg har løst, byttet bare ut ArrayOutOfBound til IndexOutOfBoud. 
+Videre oppretter jeg en ny liste og setter opp tablengde, om lengden på lista er mindre enn 1 returnerer
+vi bare lista tilbake. Ellers oppretter vi en node som starter på fra, og looper gjennom en forløkke, 
+altså resten av verdiene i lista. Hvis lengden er større enn 0, legger
+vi inn node.verdi i lista, deretter setter vi noden lik noden sin neste, så er det en mindre verdi i tabellen
+så begynner vi å loope gjennom forløkken igjen. Til slutt når alle verdiene er loopet gjennom returnerer vi lista.
 
 Oppgave 4 går bare igjennom listen og returnerer indeks til første noden (fra
 venstre) som inneholder verdien vi ser etter. Hvis verdi er null, eller den
@@ -45,9 +53,49 @@ setter inn noden på indeksen og ordner pekerene så alt blir rett. Oppdaterer
 til slutt antall og endringer. Forsøkte å bruke finnNode() metoden her
 tidligere, men fikk det ikke til å bli rett.
 
-6...
+Oppgave 6 går ut på å enten fjerne en verdi man oppgir eller fjerne selve indeksen man oppgir.
+Metoden for å fjerne verdien man oppgir setter jeg først opp en if hvor verdien vi leter etter er en nullverdi, i det 
+tilfellet returnerer vi false. Deretter oppretter jeg en peker til hode. Har en while for hvis pekeren q ikke er null, 
+og i det tillfellet verdien vi leter etter allerede er den verdien pekeren q peker på. Hvis dette er tillfellet breaker
+vi whilen, og setter pekeren q til å peke på q.neste, for å fjerne verdien. Må også huske å ha tillfellet hvis det veriden
+vi leter etter ikke finnes i lista, opprettet da en if q==null return false. Videre har vi 4 tillfeller som kan skje.
+Tilfelle 1: lengden til lista er lik 1, så setter vi hode og hale lik 0, slik at verdien ikke blir pekt på.
+Tilfelle 2: fjerne første verdien i lista. da setter vi peker lik hode, og at hode til lista blir neste
+og hode til forrige er lik null siden det første elemenet i lista peker på null som forrige.
+Tilfelle 3: fjerne siste verdien i lista. Gjør akkurat slik jeg gjorde som å fjerne første verdi i lista 
+bare nå sette q lik hale, og hale sin neste er null og hale er nå lik hale sin forrige slik at vi dropper verdien vi står 
+på.
+Tilfelle 4: fjerne en verdi som er midt i lista. Setter da pekeren til å peke på neste verdi for å da ikke peke på verdien
+vi vil fjerne, altså pekeren hopper over verdien vi vil fjerne. Akkurat det samme for forrige peker
 
-7...
+Så måtte jeg sette pekeren sin verdi lik null og sette neste og forrige pekerene lik null.
+Og sette opp at det er en mindre node i lista og det har økt med en endring. Så returnerer vi true for hver av de fire 
+tilfellene hvis en av dem har skjedd, hvis ikke returneres false pga enten er verdien vi lette etter null, verdien vi
+vil fjerne finnes ikke i lista
+
+Metoden for å fjerne indeksen til verdien vi oppgir starter ved at jeg bruker en indeksKontroller som allerede er gitt
+til oss i obligen. Deretter oppretter jeg en peker som peker på hode. Her har vi 4 tilfeller.
+Tilfelle 1: Er kun 1 verdi i lista, da setter vi hode og hale lik null for å hoppe over verdien helt
+Tilfelle 2: Skal fjerne første indeks, indeks 0, da setter vi hode lik hode sin neste og hode sin forrige lik 0 
+akkurat som vi gjorde i metoden for å fjerne verdien
+Tilfelle 3: Fjerner siste indeks ved å sette pekeren vår til halen og så sette hale lik hale sin forrige og hale sin neste
+lik null (likt som metoden for å fjerne verdi)
+Tilfelle 4: Fjerne indeksen i midten, bruker finnNode metoden for å finne hvilken indeks det er snakk om.
+Setter da peker lik finnNode(indeks), så setter vi peker sin forrige sin neste lik peker sin neste aka hopper
+over indeksen vi vil fjerne. Så peker sin neste sin forrige er lik peker sin forrige, hopper slik også over indeksen.
+Så må jeg sette peker sin verdi lik null og peker sin neste og forrige lik null. 
+Huske antall-- fordi en mindre node i lista og antall++ fordi det har økt med en endring, så returnerer vi VERDIEN vi 
+har fjerna.
+
+Oppgave 7 som er nullstill metoden som skal nullstille lista.
+Gikk frem med å opprette en peker som peker på hode og en q som er lik null, altså peker som peker på null.
+HVIS p ikke er null setter vi q(peker på null) lik p sin neste slik at den blir null, så setter vi p sin forrige
+(som er hode som da ikke har en forrige) 
+lik p sin neste lik null slik at pekerene kun peker på null nå. Vi setter p.verdi lik null og p=q fordi de nå begge peker
+på null. Må så sette hode=hale=null siden vi ikke har noe hode og hale lengere og antall blir lik 0
+og det har nå økt en endring.
+
+
 
 8...
 
