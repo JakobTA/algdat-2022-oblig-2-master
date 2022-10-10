@@ -122,12 +122,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                     node = node.neste; //videre til neste node og fortsetter slik til vi kommer til kun 1 element
                     tablengde--;
                 }
-
             }
             return liste;
         }
         // throw new UnsupportedOperationException();
-       // return liste;
     }
 
         private void fratilKontroller(int antall, int fra, int til){
@@ -200,12 +198,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             hale.neste = node; node.forrige = hale;
             hale = node;
         } else{ //Tilfelle 4 - skal legges mellom to noder. Koden under er lånt og tilpasset fra kompendiet.
+            // Fikk hjelp på denne, må gåes igjennom en ekstra gang
             //Begynner på begynnelsen av listen
             node = hode;
             //Går igjennom listen og finner noden før indeksen
-            for (int i = 0; i < indeks; i++) node = node.neste;{
+            for(int i = 0; i < indeks; i++) node = node.neste;{
                 //Setter noden som skal inn, mellom to noder underveis
-                node = new Node<T>(verdi, node.forrige, node);
+                node = new Node<>(verdi, node.forrige, node);
             }
             //Setter til slutt noden på indeks og setter korrekt pekere bak og frem
             node.neste.forrige = node.forrige.neste = node;
