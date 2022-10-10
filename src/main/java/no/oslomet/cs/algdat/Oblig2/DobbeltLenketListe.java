@@ -105,21 +105,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         fratilKontroller(antall, fra, til);
 
-        Liste<T> liste = new DobbeltLenketListe<>();
-        int tablengde = til-fra;
+        Liste<T> liste = new DobbeltLenketListe<>();  //oppretter ny dobbelt lenket liste
+        int tablengde = til-fra; //skriver inn hva lengden er
 
-        if (tablengde < 1) {
+        if (tablengde < 1) {  //hvis lengden er mindre enn 1 returnerer vi bare lista tilbake
             return liste;
 
         } else{
 
-            Node<T> node = finnNode(fra);
+            Node<T> node = finnNode(fra); //setter opp noe til å starte fra starten av
 
-            for (int i = fra; i <=til; i++){
+            for (int i = fra; i < til; i++){  //forløkke for å loope igjennom lista
 
                 if (tablengde > 0) {
-                    liste.leggInn(node.verdi);
-                    node = node.neste;
+                    liste.leggInn(node.verdi); //hvis lengde større enn 0, legger vi inn nodens verdi
+                    node = node.neste; //videre til neste node og fortsetter slik til vi kommer til kun 1 element
                     tablengde--;
                 }
 
@@ -274,12 +274,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //throw new UnsupportedOperationException();
         if (verdi == null) return false;          // ingen nullverdier i listen
 
-        Node<T> q = hode;            // hjelpepekere
+        Node<T> q = hode;            // hjelpepekere, setter peker lik hode
 
-        while (q != null)                         // q skal finne verdien t
+        while (q != null)                         // så lenge q ikke er null
         {
-            if (q.verdi.equals(verdi)) break;       // verdien funnet
-            q = q.neste;                     // p er forgjengeren til q
+            if (q.verdi.equals(verdi)) break;       // q peker allerede på verdien vi vil finne
+            q = q.neste;                     // setter q lik q sin neste for å "hoppe" over den verdien vi står på
         }
 
         if (q == null) return false;              // fant ikke verdi
@@ -307,7 +307,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         q.verdi = null;               //husk å sette pekerne lik null!
         q.forrige = q.neste = null;
 
-        antall--; endringer++;                // en node mindre i listen
+        antall--; endringer++;                // en node mindre i listen, og en endring mer
         return true;                          // vellykket fjerning
     }
 
@@ -321,10 +321,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         Node<T> peker = hode;                             // hjelpevariabel PEKER FJERNER
 
         if (antall == 1) {          //tilfelle 1
-            hode = hale = null;    // det var kun en verdi i listen
+            hode = hale = null;    // det var kun 1 verdi i listen
         }
         //tilfelle 2
-        else if (indeks == 0)                     // skal første verdi fjernes?
+        else if (indeks == 0)                     // første verdi skal fjernes
         {
 
             hode = hode.neste;              // hode flyttes til neste node
@@ -357,13 +357,13 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     public void nullstill() {
         //throw new UnsupportedOperationException();
 
-        Node<T> p = hode, q = null;
+        Node<T> p = hode, q = null;   //lager peker p som peker på hode
 
-        while(p!=null){
-            q = p.neste;
-            p.forrige = p.neste = null;
+        while(p!=null){   //så lenge p ikke er null
+            q = p.neste; //q er lik p sin neste, altså nå er p sin neste null
+            p.forrige = p.neste = null; //p sin forrige og neste er nå null
             p.verdi = null;
-            p = q;
+            p = q; //p som pekte på hode er nå q som peker på null aka p er null så lik q
         }
 
         hode = hale = null;
