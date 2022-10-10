@@ -277,8 +277,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         while (q != null)                         // så lenge q ikke er null
         {
-            if (q.verdi.equals(verdi)) break;       // q peker allerede på verdien vi vil finne
-            q = q.neste;                     // setter q lik q sin neste for å "hoppe" over den verdien vi står på
+            if (q.verdi.equals(verdi)) break;       // q peker allerede på verdien vi vil finne så breaker vi ut
+            q = q.neste;                     // setter q lik q sin neste hvis q ikke allerede pekte på verdien vi ville fjerne
         }
 
         if (q == null) return false;              // fant ikke verdi
@@ -348,13 +348,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         T verdi = peker.verdi;       //husk å sette pekerne lik null!!
         peker.verdi = null;
         peker.forrige = peker.neste = null;
-        antall--; endringer++;                // reduserer antallet
+        antall--; endringer++;                // reduserer antallet og økt med en endring
         return verdi;                         // returner fjernet verdi
     }
 
     @Override
     public void nullstill() {
         //throw new UnsupportedOperationException();
+
+        //inspirasjon fra kompendiet!
 
         Node<T> p = hode, q = null;   //lager peker p som peker på hode
 
