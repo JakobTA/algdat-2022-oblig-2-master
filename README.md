@@ -25,7 +25,16 @@ legg til node med valgt tabell-verdi. Gjør dette til vi er tomme for
 elementer i a. tom() og antall() returnerer bare true om antall == 0 og
 returnerer antallet selv.
 
-I oppgave 2 så brukte vi en ... til å ...
+I oppgave 2a begynner vi i toString()-metoden med å sette opp en ny String s med stringbuilder 
+metoden. Legger til en klammeparentes og sjekker om listen er tom eller ikke. Er den tom, 
+legges sluttparentesen til og s returneres. Hvis ikke tom, legg første nodes verdi 
+inn i s og gå videre til neste node. Gå så igjennom resten, legg til komma mellom verdier, og 
+legg til neste verdi. Metoden omvendtString() følger samme mønster, men bruker pekere til forrige 
+istedenfor neste, og bygger strengen med innholdet reversjert.
+2b begynner med en null-verdi-sjekk og en opprettelse av node med inn-verdien.
+I denne metoden skal vi bare legge til noden bakerst og det holder derfor med å 
+sjekke om listen er tom eller ikke. Er den tom, sett hale og hode = noden. Er den 
+ikke tom, koble nodens pekere til halen og flytt halen. Oppdater antall og endringer.
 
 I oppgave 3a utføres først en indeksKontroll, så sjekkes det om indeksen
 ligger i første eller andre halvdel av listen. Avhengig av dette, begynner vi
@@ -97,7 +106,14 @@ og det har nå økt en endring.
 
 
 
-8...
+I opgpave 8 sjekkes det om hasNext() er true. HasNext() sjekker om neste peker peker til null eller ikke.
+Videre var det bare å følge oppgave beskrivelsen i a) som var å retunere verdien fra noden 
+etter å ha tilordnet denne til denne.neste. Fikk insperasjon fra programkode 3.2.4 c)
+For oppgave b hentet jeg insperiasjon fra kompendiet programkode Programkode 3.3.4 e)
+Oppgave c var å bare kopiere skildekode fra DobbeltLenkeListeIteroator() men bare tilordne denne = finnNode(indeks).
+Videre i siste oppgave var det også bare å følge oppgave teksten. Det ble brukt indeksKontroll
+for å sjekke om indeksen er lovlig. Deretter opprettes det en ny instans it. it.denne blir tilordnet noden gjennom finnNode(indeks)
+og til slutt returneres it.
 
 Oppgave 9 minte litt om oppgave 5, bare at vi skulle fjerne en node
 istedenfor å sette inn. Sjekker først hva valgt node, eller "denne", er.
@@ -106,5 +122,12 @@ for å se om vi har lov til å gå videre med operasjonen. Så er det bare å
 gjøre motsatt av oppgave 5. Vi ordner pekere slik at noden som skal fjernes
 mister kobling til listen.
 
-10...
+I oppgave 10 sjekker jeg først at antall elementer av noder er mer enn 1. Hvis det gjelder;
+1. Tilordnes antall_elementer = liste.antall() som oppgaven ber om. 
+2. Videre bruker jeg utvalgssortering som inneholder en finnMaks og bytt metoden. 
+finnMaks og bytt algoritmen har med metoder fra Liste interface og objekt fra Comparator.
+3.Prosessen kjøres helt til for-løkken i utvalgssorteringen stopper når det kun er en element igjen.
+
+Hvis antallet noder er tomt eler null, returners innholdet som tomt eller null. 
+Oppgaven ber ikke om den mest effektive sorterings metoden. Utvalgssortering har kompliksitet O(n^2).
 
