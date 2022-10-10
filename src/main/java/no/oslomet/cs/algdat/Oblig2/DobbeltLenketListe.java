@@ -434,7 +434,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         indeksKontroll(indeks,false);//Det må først sjekkes at
         //indeksen er lovlig. Bruk metoden indeksKontroll().
-        new DobbeltLenketListeIterator();
         DobbeltLenketListeIterator it = new DobbeltLenketListeIterator();
         it.denne = finnNode(indeks);
         //Deretter skal den ved hjelp av
