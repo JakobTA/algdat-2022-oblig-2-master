@@ -104,8 +104,6 @@ lik p sin neste lik null slik at pekerene kun peker på null nå. Vi setter p.ve
 på null. Må så sette hode=hale=null siden vi ikke har noe hode og hale lengere og antall blir lik 0
 og det har nå økt en endring.
 
-
-
 I opgpave 8 sjekkes det om hasNext() er true. HasNext() sjekker om neste peker peker til null eller ikke.
 Videre var det bare å følge oppgave beskrivelsen i a) som var å retunere verdien fra noden 
 etter å ha tilordnet denne til denne.neste. Fikk insperasjon fra programkode 3.2.4 c)
