@@ -96,7 +96,7 @@ Så må jeg sette peker sin verdi lik null og peker sin neste og forrige lik nul
 Huske antall-- fordi en mindre node i lista og antall++ fordi det har økt med en endring, så returnerer vi VERDIEN vi 
 har fjerna.
 
-Oppgave 7 som er nullstill metoden som skal nullstille lista. Valgte metode 1 som er raskest.
+Oppgave 7 som er nullstill metoden som skal nullstille lista. Valgte metode 1 som er raskest for større lister også.
 Gikk frem med å opprette en peker som peker på hode og en q som er lik null, altså peker som peker på null.
 HVIS p ikke er null setter vi q(peker på null) lik p sin neste slik at den blir null, så setter vi p sin forrige
 (som er hode som da ikke har en forrige) 
