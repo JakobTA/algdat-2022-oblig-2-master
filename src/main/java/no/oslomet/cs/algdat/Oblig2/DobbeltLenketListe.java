@@ -133,7 +133,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
        // return liste;
     }
 
-
         private void fratilKontroller(int antall, int fra, int til){
             if (fra < 0)                                  // fra er negativ
                 throw new IndexOutOfBoundsException
@@ -148,14 +147,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                         ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
         }
 
-
-
-
     @Override
     public int antall() {
         //Bare returnerer antallet
         return antall;
-
         //throw new UnsupportedOperationException();
     }
 
@@ -177,18 +172,15 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //Hvis listen er tom, la hode og hale peke til den første nye noden
         if(tom()){
             hode = hale = node;
-            antall++;
-            endringer++;
-            return true;
-        //Hvis ikke, begynn på slutten, sett nodes pekere etter hale og flytt halens pekere til noden og flytt halen
+            //Hvis ikke, begynn på slutten, sett nodes pekere etter hale og flytt halens pekere til noden og flytt halen
         }else{
             node.forrige = hale;
             hale.neste = node;
             hale = node;
-            antall++;
-            endringer++;
-            return true;
         }
+        antall++;
+        endringer++;
+        return true;
         //throw new UnsupportedOperationException();
     }
 
@@ -435,8 +427,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //throw new UnsupportedOperationException();
     }
 
-
-
     @Override
     public Iterator<T> iterator() {
         //insperiasjon fra kompendiet programkode Programkode 3.3.4 e)
@@ -499,8 +489,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 throw new ConcurrentModificationException(); //Hvis ikke, kastes en ConcurrentModificationException.
             }
             //henter inspirasjon fra kompendiet programkode 3.2.4 c) public T next()
-
-
+            
             // Deretter
             //settes fjernOK til sann/true, verdien til denne returneres og denne flyttes til den neste node.
             fjernOK = true;
@@ -578,20 +567,5 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             return;//throw new UnsupportedOperationException();
         }
     }
-
-    public static void main(String[] args) {
-        Integer[] s = {8, 5, 2, 11, 7, 3, 15, 14, 10, 17, 18, 9, 4, 12, 13, 19, 20, 1, 16, 6};
-        String [] navn = {"G", "B", "F", "C", "E", "D", "A"};
-        Liste<Integer> l1 = new DobbeltLenketListe<>(s);
-        Liste<String> l2 = new DobbeltLenketListe<>(navn);
-        System.out.println(l1);
-        DobbeltLenketListe.sorter(l1,Comparator.naturalOrder());
-        System.out.println(l1);
-        System.out.println("");
-        System.out.println(l2);
-        DobbeltLenketListe.sorter(l2,Comparator.naturalOrder());
-        System.out.println(l2);
-    }
-
 } // class DobbeltLenketListe
 
