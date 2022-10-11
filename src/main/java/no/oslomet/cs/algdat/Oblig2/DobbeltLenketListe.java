@@ -197,17 +197,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         } else if(indeks == antall){ //Tilfelle 3 - skal legges bakerst
             hale.neste = node; node.forrige = hale;
             hale = node;
-        } else{ //Tilfelle 4 - skal legges mellom to noder. Koden under er lånt og tilpasset fra kompendiet.
-            // Fikk hjelp på denne, må gåes igjennom en ekstra gang
-            //Begynner på begynnelsen av listen
-            node = hode;
-            //Går igjennom listen og finner noden før indeksen
-            for(int i = 0; i < indeks; i++) node = node.neste;{
-                //Setter noden som skal inn, mellom to noder underveis
-                node = new Node<>(verdi, node.forrige, node);
-            }
-            //Setter til slutt noden på indeks og setter korrekt pekere bak og frem
-            node.neste.forrige = node.forrige.neste = node;
+        } else{ //Tilfelle 4 - skal legges mellom to noder.
+            //Finner noden på indeks vi er ute etter.
+            node = finnNode(indeks);
+            //Setter inn noden og ordner pekere. Denne linjen er hentet fra Kompendiets leggInn-kildekode
+            node.forrige = node.forrige.neste = new Node<>(verdi, node.forrige, node);
         }
         antall++; endringer++;
         //throw new UnsupportedOperationException();
@@ -290,7 +284,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         else if (q == hode ){ //fjerne først
             hode = hode.neste;
             hode.forrige = null;
-
         }
 
         else if (q == hale) {  //fjerne sist
@@ -325,7 +318,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         //tilfelle 2
         else if (indeks == 0)                     // første verdi skal fjernes
         {
-
             hode = hode.neste;              // hode flyttes til neste node
             hode.forrige = null;              //hode sin forrige settes til null
         }
@@ -496,12 +488,12 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         public void remove() {
             //Oppretter noden vil skal bruke for å navigere oss i listen og ordne pekere
             Node<T> node;
-            //Sjekker hva "denne" egentlig er på i listen
+            //Dersom "denne" == null, skal vi begynne på halen (hale har ingen "neste")
             if(denne == null) {
-                //Dette betyr at den hare hale som forrige
+                //Dette betyr at "denne" har hale som forrige (vi antar det bare, da oppgaven ber om det)
                 node = hale;
             }else{
-                //Hvis den ikke er dette betyr det at vi kan sette node som den til venstre for "denne"
+                //Hvis "denne" ikke er lik null, dette betyr det at vi kan sette node som den til venstre for "denne"
                 node = denne.forrige;
             }
 
